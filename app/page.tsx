@@ -121,6 +121,20 @@ export default function Home() {
             )}
           </div>
         )}
+
+        <footer className="mt-16 mb-12 text-center px-4">
+          <p className="text-[13px] text-[var(--color-muted)] leading-relaxed">
+            Desenvolvido pelo Professor <span className="text-[var(--color-text)] font-semibold">Sérgio Araújo</span> para os seus alunos com a generosidade de{' '}
+            <a 
+              href="https://open.spotify.com/show/1XRYKpWu5iQFoldNkzyWE4?si=EZHPxwtQQSebqm0ERzKEHA" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[var(--color-accent)] font-bold hover:underline decoration-2 underline-offset-4"
+            >
+              Pílulas Literárias
+            </a>
+          </p>
+        </footer>
       </div>
 
       <BottomNav />

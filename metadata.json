@@ -1,0 +1,6 @@
+{
+  "name": "Brisa Literária",
+  "description": "Ouvir para sentir, sentir para aprender",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["PWA", "IndexedDB", "CacheStorage"]
+}

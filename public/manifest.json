@@ -1,0 +1,32 @@
+{
+  "name": "Brisa Literária",
+  "short_name": "Brisa",
+  "description": "Ouvir para sentir, sentir para aprender",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#b2e0e8",
+  "background_color": "#f4fbfd",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "label": "Homescreen of Brisa Literária"
+    }
+  ]
+}

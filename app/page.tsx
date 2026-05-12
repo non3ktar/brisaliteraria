@@ -16,13 +16,7 @@ export default function Home() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const showToast = useToastStore((state) => state.show);
 
-  const pullDistance = useMotionValue(0);
-  const pullThreshold = 80;
-  
-  // Progress indicators
-  const opacity = useTransform(pullDistance, [0, pullThreshold], [0, 1]);
-  const scale = useTransform(pullDistance, [0, pullThreshold], [0.8, 1]);
-  const rotate = useTransform(pullDistance, [0, pullThreshold], [0, 180]);
+
 
   const fetchObras = useCallback(async () => {
     try {
@@ -69,40 +63,13 @@ export default function Home() {
     showToast('Sincronizado com sucesso', 'success');
   };
 
-  const handleDragEnd = () => {
-    if (pullDistance.get() >= pullThreshold) {
-      handleRefresh();
-    }
-    pullDistance.set(0);
-  };
+
 
   return (
     <div className="max-w-md mx-auto px-6 pt-12 pb-24 relative overflow-x-hidden">
-      {/* Pull Indicator */}
-      <motion.div 
-        style={{ 
-          y: isRefreshing ? 20 : pullDistance,
-          opacity,
-          scale 
-        }}
-        className="absolute top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
-      >
-        <div className="bg-white p-3 rounded-full shadow-lg border border-[var(--color-primary)]/10 text-[var(--color-accent)]">
-          <motion.div style={{ rotate: isRefreshing ? 0 : rotate }} animate={isRefreshing ? { rotate: 360 } : {}}>
-            <RefreshCw size={24} className={isRefreshing ? "animate-spin" : ""} />
-          </motion.div>
-        </div>
-      </motion.div>
 
-      <motion.div
-        drag="y"
-        dragConstraints={{ top: 0, bottom: pullThreshold + 20 }}
-        dragElastic={0.4}
-        onDrag={(e, info) => pullDistance.set(Math.max(0, info.offset.y))}
-        onDragEnd={handleDragEnd}
-        animate={isRefreshing ? { y: 60 } : { y: 0 }}
-        className="relative z-10"
-      >
+
+      <div className="relative z-10 min-h-screen">
         <header className="flex items-center justify-between mb-10">
           <div>
             <h1 className="font-display text-4xl font-bold text-[var(--color-text)] flex items-center gap-3">
@@ -112,9 +79,18 @@ export default function Home() {
               Ouvir para sentir, sentir para aprender
             </p>
           </div>
-          <Link href="/biblioteca" className="p-3 bg-[var(--color-white)] text-[var(--color-primary)] rounded-2xl shadow-lg shadow-[var(--color-shadow)] border border-[var(--color-primary)]/5 hover:scale-110 transition-all">
-            <Library size={24} strokeWidth={1.5} />
-          </Link>
+          <div className="flex gap-2">
+            <button 
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+              className={`p-3 bg-[var(--color-white)] text-[var(--color-primary)] rounded-2xl shadow-lg shadow-[var(--color-shadow)] border border-[var(--color-primary)]/5 hover:scale-110 transition-all ${isRefreshing ? 'animate-spin opacity-50' : ''}`}
+            >
+              <RefreshCw size={24} strokeWidth={1.5} />
+            </button>
+            <Link href="/biblioteca" className="p-3 bg-[var(--color-white)] text-[var(--color-primary)] rounded-2xl shadow-lg shadow-[var(--color-shadow)] border border-[var(--color-primary)]/5 hover:scale-110 transition-all">
+              <Library size={24} strokeWidth={1.5} />
+            </Link>
+          </div>
         </header>
 
         {loading ? (
@@ -145,7 +121,7 @@ export default function Home() {
             )}
           </div>
         )}
-      </motion.div>
+      </div>
 
       <BottomNav />
       <Toast />
